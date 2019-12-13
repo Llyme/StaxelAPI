@@ -23,3 +23,5 @@ Check keyboard state, as well as a just-pressed key check.
 
 ### ModPlugin
 A less bloated hook so you don't have to create all the functions that you won't be using.
+
+This is meant to be inherited just like with the Staxel mod hooks.
