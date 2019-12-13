@@ -3,14 +3,22 @@ using Plukit.Base;
 using Staxel.Items;
 using Staxel.Logic;
 using Staxel.Tiles;
+using System.IO;
+using System.Reflection;
 
 namespace StaxelAPI
 {
 	public abstract class ModPlugin : Staxel.Modding.IModHookV4
 	{
-		public readonly INI ini = new INI();
+		public readonly INI ini;
 		public static Universe Universe { get; internal set; }
 		public static Blob UniverseSettings { get; internal set; }
+
+		public ModPlugin()
+		{
+			string name = Assembly.GetCallingAssembly().GetName().Name;
+			ini = new INI(Path.Combine(Directory.GetCurrentDirectory(), "PluginConfig", $"{name}.ini"));
+		}
 
 		public virtual bool CanInteractWithEntity(Entity entity, Entity lookingAtEntity)
 		{

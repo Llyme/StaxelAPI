@@ -20,6 +20,8 @@ namespace StaxelAPI
 
 					if (!ini.Has(section, key))
 						ini[section, key] = defaultValue.ToString();
+
+					ini.Save();
 				}
 
 				public new bool Value
@@ -48,6 +50,8 @@ namespace StaxelAPI
 
 					if (!ini.Has(section, key))
 						ini[section, key] = defaultValue.ToString();
+
+					ini.Save();
 				}
 
 				public new int Value
@@ -76,6 +80,8 @@ namespace StaxelAPI
 
 					if (!ini.Has(section, key))
 						ini[section, key] = defaultValue.ToString();
+
+					ini.Save();
 				}
 
 				public new float Value
@@ -104,6 +110,8 @@ namespace StaxelAPI
 
 					if (!ini.Has(section, key))
 						ini[section, key] = defaultValue.ToString();
+
+					ini.Save();
 				}
 
 				public new string Value
@@ -159,19 +167,6 @@ namespace StaxelAPI
 
 		public event UpdateListener OnUpdate;
 
-		public INI(string path = null)
-		{
-			if (path == null)
-			{
-				string name = Assembly.GetExecutingAssembly().GetName().Name;
-				this.path = Path.Combine(Directory.GetCurrentDirectory(), "PluginConfig", $"{name}.ini");
-			}
-			else
-				this.path = path;
-
-			Load();
-		}
-
 		public string this[string section, string key]
 		{
 			get
@@ -194,6 +189,13 @@ namespace StaxelAPI
 			}
 		}
 
+		public INI(string path)
+		{
+			this.path = path;
+
+			Load();
+		}
+
 		public bool Has(string section)
 		{
 			return list.ContainsKey(section);
@@ -202,6 +204,26 @@ namespace StaxelAPI
 		public bool Has(string section, string key)
 		{
 			return Has(section) && list[section].ContainsKey(key);
+		}
+
+		public Entry.Bool Bool(string section, string key, bool defaultValue)
+		{
+			return new Entry.Bool(this, section, key, defaultValue);
+		}
+
+		public Entry.Float Float(string section, string key, float defaultValue)
+		{
+			return new Entry.Float(this, section, key, defaultValue);
+		}
+
+		public Entry.Int Int(string section, string key, int defaultValue)
+		{
+			return new Entry.Int(this, section, key, defaultValue);
+		}
+
+		public Entry.String String(string section, string key, string defaultValue)
+		{
+			return new Entry.String(this, section, key, defaultValue);
 		}
 
 		internal void Update()
