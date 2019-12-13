@@ -8,11 +8,11 @@ Some helpful stuff to make code-based mods for Staxel.
 * Extract the files in `[Staxel Directory]\bin`.
 * Play.
 
-## INI
+### INI
 A simple INI system with an automatic read-and-write when any value changes in both inside and outside the game.
 
-## InputHelper
+### InputHelper
 Check keyboard state, as well as a just-pressed key check.
 
-## ModPlugin
+### ModPlugin
 A less bloated hook so you don't have to create all the functions that you won't be using.
